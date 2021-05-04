@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pennote/Screens/HomeScreen.dart';
 import 'package:pennote/Utils/responsive.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
@@ -56,7 +57,9 @@ class _AuthView extends StatelessWidget {
             ),
             Spacer(),
             ButtonView.hover(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
               width: Responsive.isDesktop(context) ? state.size.width / 2.5 : Responsive.isTablet(context) ? state.size.width / 1.5 : state.size.width,
               onHover: ContainerChanges(
                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
