@@ -23,6 +23,7 @@ class _NoteTileView extends StatelessWidget {
     return ButtonView(
       onPressed: () {},
       color: Colors.transparent,
+      splashColor: Colors.black87.withOpacity(0.50),
       padding: EdgeInsets.all(10.0),
       margin: EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -32,7 +33,7 @@ class _NoteTileView extends StatelessWidget {
             text: "Shopping List",
             color: colors.white,
             letterSpacing: 1.5,
-            size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 25.0 : 20.0,
+            size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
             fontWeight: FontWeight.w500,
             padding: EdgeInsets.only(bottom: 15.0),
           ),
@@ -42,7 +43,7 @@ class _NoteTileView extends StatelessWidget {
             letterSpacing: 1.5,
             maxLines: 2,
             textOverflow: TextOverflow.ellipsis,
-            size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 18.0 : 15.0,
+            size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 15.0 : 12.0,
             fontWeight: FontWeight.w400,
           ),
         ],

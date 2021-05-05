@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pennote/Screens/SettingsScreen.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
 import '../Utils/responsive.dart';
@@ -22,7 +23,7 @@ class _TopBarView extends StatelessWidget {
 @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5.0),
+      padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
       decoration: BoxDecoration(
         color: colors.bg,
         boxShadow: [
@@ -56,6 +57,7 @@ class _TopBarView extends StatelessWidget {
       onSelected: (i) {
         if(i == 0) {
           //open settings
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
         }  else {
           //logout
         }
