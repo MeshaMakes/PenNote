@@ -6,6 +6,9 @@ import 'Widgets/AuthWidget.dart';
 
 void main() {
   runApp(MaterialApp(
+    theme: ThemeData(
+      accentColor: colors.primary
+    ),
     home: Auth(),
   ));
 }

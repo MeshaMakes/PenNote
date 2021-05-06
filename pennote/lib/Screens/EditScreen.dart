@@ -69,16 +69,24 @@ class _EditScreenView extends StatelessWidget {
                 children: [
                   ButtonView(
                     onPressed: () {},
-                    child: Icon(Icons.save, color: colors.white, size: 30.0,),
+                    color: Colors.transparent,
+                    splashColor: Colors.black87.withOpacity(0.50),
+                    child: Icon(Icons.save, color: colors.white, size: 25.0,),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                   ),
                   ButtonView(
                     onPressed: () {},
-                    child: Icon(Icons.info_outline, color: colors.white, size: 30.0,),
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    color: Colors.transparent,
+                    splashColor: Colors.black87.withOpacity(0.50),
+                    child: Icon(Icons.info_outline, color: colors.white, size: 25.0,),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                   ),
                   ButtonView(
                     onPressed: () {},
-                    child: Icon(Icons.delete, color: colors.red, size: 30.0,),
+                    color: Colors.transparent,
+                    splashColor: Colors.black87.withOpacity(0.50),
+                    child: Icon(Icons.delete, color: colors.red.withOpacity(0.80), size: 25.0,),
+                    padding: EdgeInsets.only(left: 10.0, top: 5.0, bottom: 5.0),
                   ),
                 ],
               ),
