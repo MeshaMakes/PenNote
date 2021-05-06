@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pennote/Screens/EditScreen.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
-import '../Utils/responsive.dart';
+import '../Utils/Responsive.dart';
 
 class NoteTile extends StatefulWidget {
   @override
@@ -21,7 +22,9 @@ class _NoteTileView extends StatelessWidget {
 @override
   Widget build(BuildContext context) {
     return ButtonView(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScreen()));
+      },
       color: Colors.transparent,
       splashColor: Colors.black87.withOpacity(0.50),
       padding: EdgeInsets.all(10.0),

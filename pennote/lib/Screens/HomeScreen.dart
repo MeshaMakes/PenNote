@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pennote/Widgets/NoteTile.dart';
 import 'package:pennote/Widgets/TopBar.dart';
 import 'package:sad_lib/CustomWidgets.dart';
-import '../Utils/responsive.dart';
+import '../Utils/Responsive.dart';
 import '../Utils/Colors.dart' as colors;
 
 class HomeScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pennote/Screens/HomeScreen.dart';
-import 'package:pennote/Utils/responsive.dart';
+import 'package:pennote/Utils/Responsive.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
 

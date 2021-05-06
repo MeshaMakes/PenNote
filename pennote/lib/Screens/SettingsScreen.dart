@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
-import '../Utils/responsive.dart';
+import '../Utils/Responsive.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
