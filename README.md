@@ -30,3 +30,30 @@ PenNote is a minimal *markdown editor* 📝 made using Flutter as front end and 
 [<img src="https://cdn.statically.io/img/strattonapps.com/wp-content/uploads/2020/02/flutter-logo-5086DD11C5-seeklogo.com_.png" height="50">](https://flutter.dev/)
 [<img src="https://seeklogo.com/images/D/dart-logo-FDA1939EC4-seeklogo.com.png" height="50">](https://dart.dev/)
 [<img src="https://firebase.google.com/images/brand-guidelines/logo-built_white.png" height="50">](https://firebase.google.com/)
+
+---
+
+## **Installation**
+###### You may have to run ```pub.get``` in ```pubspec.ymal``` if any errors occur
+
+In the command terminal, run the following commands:
+
+```
+$ git clone https://github.com/MeshaMakes/PenNote.git
+$ cd pennote/
+$ flutter run
+```
+
+For Android
+
+```
+Ensure that you have an Android emulator connected, whether virtual or physical.
+Run the following command in the ternimal.
+$ flutter run
+
+Or select your device from the drop down and run.
+```
+
+For Web
+
+> Coming Soon
