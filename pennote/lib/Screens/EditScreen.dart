@@ -180,12 +180,15 @@ class _EditScreenView extends StatelessWidget {
                   data: state._textOutput,
                   styleConfig: StyleConfig(
                     markdownTheme: MarkdownTheme.darkTheme,
+                    titleConfig: TitleConfig(
+                      showDivider: false,
+                    ),
                     pConfig: PConfig(
                       linkStyle: TextStyle(color: colors.primary),
                       onLinkTap: (url) {
                         launch(url);
                       }
-                    )
+                    ),
                   ),
                 ),
               ),
