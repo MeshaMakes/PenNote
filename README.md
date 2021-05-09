@@ -36,6 +36,9 @@ PenNote is a minimal *markdown editor* 📝 made using Flutter as front end and 
 ## **Installation**
 ###### You may have to run ```pub.get``` in ```pubspec.ymal``` if any errors occur
 
+**Please note that this is being buildt for android first so you will need and android device to run on, and secondly in my preferred way of doing things I code all the UI elements then add the functionality afterwards so in the start nothing may work iinitially so bare with me.**
+
+
 In the command terminal, run the following commands:
 
 ```
@@ -57,3 +60,7 @@ Or select your device from the drop down and run.
 For Web
 
 > Coming Soon
+
+Once you run the app you should be opened up to this page where you can then enter the markdown view:
+
+![up276o3ov0gpwdkhio0v](https://user-images.githubusercontent.com/53268895/117575303-34691780-b0af-11eb-893f-1df408797b16.jpg)
