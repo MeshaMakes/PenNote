@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pennote/Screens/HomeScreen.dart';
-import 'package:pennote/Utils/Responsive.dart';
+import '../Screens/HomeScreen.dart';
+import '../Utils/Responsive.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
 
-class Auth extends StatefulWidget {
+class AuthScreen extends StatefulWidget {
   @override
   _AuthController createState() => _AuthController();
 }
 
-class _AuthController extends State<Auth> {
+class _AuthController extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) => _AuthView(this);
 

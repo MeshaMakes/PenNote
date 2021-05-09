@@ -37,6 +37,7 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
   @override
   void dispose() {
     _tab.dispose();
+    _text.dispose();
     _titleText.dispose();
     super.dispose();
   }
@@ -74,20 +75,7 @@ class _EditScreenView extends StatelessWidget {
                     child: Icon(Icons.save, color: colors.white, size: 25.0,),
                     padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                   ),
-                  ButtonView(
-                    onPressed: () {},
-                    color: Colors.transparent,
-                    splashColor: Colors.black87.withOpacity(0.50),
-                    child: Icon(Icons.info_outline, color: colors.white, size: 25.0,),
-                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                  ),
-                  ButtonView(
-                    onPressed: () {},
-                    color: Colors.transparent,
-                    splashColor: Colors.black87.withOpacity(0.50),
-                    child: Icon(Icons.delete, color: colors.red.withOpacity(0.80), size: 25.0,),
-                    padding: EdgeInsets.only(left: 10.0, top: 5.0, bottom: 5.0),
-                  ),
+                  _showPopupNotebookMenu(context),
                 ],
               ),
             ),
@@ -204,9 +192,11 @@ class _EditScreenView extends StatelessWidget {
         color: colors.bg,
         onSelected: (i) {
           if(i == 0) {
-            //open settings
-          }  else {
-            //logout
+            //open info
+          }  else if(i == 0) {
+            //view preview
+          } else {
+            //delete note
           }
         },
         offset: Offset(0, 15),
@@ -220,17 +210,27 @@ class _EditScreenView extends StatelessWidget {
             value: 0,
             child: Row(
               children: [
-
-                TextView(text: 'Settings', color: colors.white, size: 15.0, fontWeight: FontWeight.w500, padding: EdgeInsets.only(left: 5.0),),
+                Icon(Icons.info_outline, size: 20.0, color: !Responsive.isMobile(context) ? colors.white : colors.primary,),
+                TextView(text: 'Info', color: colors.white, size: 15.0, fontWeight: FontWeight.w500, padding: EdgeInsets.only(left: 5.0),),
+              ],
+            ),
+          ),
+          if(!Responsive.isMobile(context))
+            PopupMenuItem<int>(
+            value: 1,
+            child: Row(
+              children: [
+                Icon(Icons.visibility, size: 20.0, color: colors.primary,),
+                TextView(text: 'View Preview', color: colors.white, size: 15.0, fontWeight: FontWeight.w500, padding: EdgeInsets.only(left: 5.0),),
               ],
             ),
           ),
           PopupMenuItem<int>(
-            value: 1,
+            value: 2,
             child: Row(
               children: [
-
-                TextView(text: 'Logout', color: colors.white, size: 15.0, fontWeight: FontWeight.w500, padding: EdgeInsets.only(left: 5.0),),
+                Icon(Icons.delete, size: 20.0, color: colors.red,),
+                TextView(text: 'Delete Note', color: colors.white, size: 15.0, fontWeight: FontWeight.w500, padding: EdgeInsets.only(left: 5.0),),
               ],
             ),
           ),

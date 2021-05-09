@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pennote/Widgets/NoteTile.dart';
-import 'package:pennote/Widgets/TopBar.dart';
-import 'package:sad_lib/CustomWidgets.dart';
+import '../Widgets/NoteTile.dart';
+import '../Widgets/TopBar.dart';
 import '../Utils/Responsive.dart';
 import '../Utils/Colors.dart' as colors;
 
