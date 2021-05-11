@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pennote/Utils/NoteModel.dart';
 import '../Screens/EditScreen.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
 import '../Utils/Responsive.dart';
 
 class NoteTile extends StatefulWidget {
+  final void Function() onPressed;
+  final Note note;
+  const NoteTile({Key key, this.onPressed, this.note}) : super(key: key);
   @override
   _NoteTileController createState() => _NoteTileController();
 }
@@ -32,7 +36,7 @@ class _NoteTileView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextView(
-            text: "Shopping List",
+            text: state.widget.note.title,
             color: colors.white,
             letterSpacing: 1.5,
             size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
@@ -40,7 +44,7 @@ class _NoteTileView extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 15.0),
           ),
           TextView(
-            text: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint",
+            text: state.widget.note.noteTxt,
             color: colors.white,
             letterSpacing: 1.5,
             maxLines: 2,

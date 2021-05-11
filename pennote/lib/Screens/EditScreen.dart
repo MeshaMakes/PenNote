@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import '../Utils/NoteModel.dart';
 import 'package:sad_lib/CustomWidgets.dart';
+import 'package:sad_lib/StorageClass/StorageClass.dart';
 import '../Utils/Colors.dart' as colors;
 import '../Utils/Responsive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EditScreen extends StatefulWidget {
+  final Note note;
+  const EditScreen({Key key, @required this.note}) : super(key: key);
   @override
   _EditScreenController createState() => _EditScreenController();
 }
@@ -16,21 +20,30 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
 
   TabController _tab;
   TextEditingController _text;
-  TextEditingController _titleText;
 
-  String _textOutput = "";
+  // set note text from storage from init
+  String _noteText = "";
+
+  Note note;
 
   void setText(String text) {
     setState(() {
-      this._textOutput = text;
+      this._noteText = text;
     });
+  }
+
+  void saveNote() {
+    if(_noteText != null && _noteText.isNotEmpty) {
+      note.noteTxt = _noteText;
+      StorageClass().writeToMapUpdate("Notes.pn", note.id, note.toJson());
+    }
   }
 
   @override
   void initState() {
     _tab = TabController(length: 2, vsync: this);
     _text = TextEditingController();
-    _titleText = TextEditingController();
+    note = widget.note;
     super.initState();
   }
 
@@ -38,7 +51,6 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
   void dispose() {
     _tab.dispose();
     _text.dispose();
-    _titleText.dispose();
     super.dispose();
   }
 }
@@ -69,7 +81,9 @@ class _EditScreenView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ButtonView(
-                    onPressed: () {},
+                    onPressed: () {
+                      state.saveNote();
+                    },
                     color: Colors.transparent,
                     splashColor: Colors.black87.withOpacity(0.50),
                     child: Icon(Icons.save, color: colors.white, size: 25.0,),
@@ -165,7 +179,7 @@ class _EditScreenView extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(20.0),
                 child: MarkdownWidget(
-                  data: state._textOutput,
+                  data: state._noteText,
                   styleConfig: StyleConfig(
                     markdownTheme: MarkdownTheme.darkTheme,
                     titleConfig: TitleConfig(
