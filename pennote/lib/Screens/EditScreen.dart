@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import '../Widgets/Dialog.dart';
+import 'package:sad_lib/FormatClass.dart';
 import '../Utils/NoteModel.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import 'package:sad_lib/StorageClass/StorageClass.dart';
@@ -18,13 +21,15 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
   @override
   Widget build(BuildContext context) => _EditScreenView(this);
 
+  //TODO: revise the last edited to make sure it adds up
+
   TabController _tab;
   TextEditingController _text;
-
-  // set note text from storage from init
-  String _noteText = "";
+  FormatClass _format;
+  DialogClass _dialog;
 
   Note note;
+  String _noteText = "";
 
   void setText(String text) {
     setState(() {
@@ -35,15 +40,45 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
   void saveNote() {
     if(_noteText != null && _noteText.isNotEmpty) {
       note.noteTxt = _noteText;
-      StorageClass().writeToMapUpdate("Notes.pn", note.id, note.toJson());
+      note.lastEdited = DateTime.now();
+      StorageClass().writeToMapUpdate("Notes.pn", note.id, note.toJson()).then((value) {
+        Fluttertoast.showToast(
+          msg: "Note Saved",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          textColor: colors.primary,
+          backgroundColor: Colors.black45,
+        );
+      });
     }
+  }
+
+  void deleteNote() {
+    _dialog.showConfirmDialog(context, "Are you sure you want to delete this note?").then((flag) {
+      if(flag) {
+        StorageClass().writeToMapRemove("Notes.pn", widget.note.id).then((value) {
+          Navigator.pop(context);
+        });
+      } else {
+        Navigator.pop(context);
+      }
+    });
   }
 
   @override
   void initState() {
     _tab = TabController(length: 2, vsync: this);
     _text = TextEditingController();
+    _format = FormatClass();
+    _dialog = DialogClass();
     note = widget.note;
+    if(widget.note != null) {
+      setState(() {
+        _text.text = widget.note.noteTxt;
+        note.noteTxt = _text.text;
+        note.creationDate = widget.note.creationDate;
+      });
+    }
     super.initState();
   }
 
@@ -118,6 +153,8 @@ class _EditScreenView extends StatelessWidget {
               Stack(
                 children: [
                   Container(
+                    width: double.infinity,
+                    height: double.infinity,
                     margin: EdgeInsets.all(20.0),
                     child: TextField(
                       controller: state._text,
@@ -148,7 +185,7 @@ class _EditScreenView extends StatelessWidget {
                             children: [
                               Icon(Icons.watch_later_outlined, color: colors.primary, size: 20.0,),
                               TextView(
-                                text: "Apr 21, 2021",
+                                text: state._format.formattedDate(state.widget.note.creationDate),
                                 size: 12.0,
                                 color: colors.white,
                                 fontWeight: FontWeight.w400,
@@ -162,7 +199,7 @@ class _EditScreenView extends StatelessWidget {
                             children: [
                               Icon(Icons.edit, color: colors.primary, size: 20.0,),
                               TextView(
-                                text: "Apr 26, 2021",
+                                text: state._format.formattedDate(state.widget.note.lastEdited),
                                 size: 12.0,
                                 color: colors.white,
                                 fontWeight: FontWeight.w400,
@@ -179,7 +216,7 @@ class _EditScreenView extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(20.0),
                 child: MarkdownWidget(
-                  data: state._noteText,
+                  data: state._text.text,
                   styleConfig: StyleConfig(
                     markdownTheme: MarkdownTheme.darkTheme,
                     titleConfig: TitleConfig(
@@ -207,10 +244,11 @@ class _EditScreenView extends StatelessWidget {
         onSelected: (i) {
           if(i == 0) {
             //open info
-          }  else if(i == 0) {
+          }  else if(i == 1) {
             //view preview
           } else {
             //delete note
+            state.deleteNote();
           }
         },
         offset: Offset(0, 15),

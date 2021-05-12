@@ -17,6 +17,8 @@ class _HomeScreenController extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => _HomeScreenView(this);
 
+  //TODO: fix notes loading when updated, add empty state art
+
   DialogClass _dialog;
   List<Note> _notes = [];
 
@@ -27,14 +29,15 @@ class _HomeScreenController extends State<HomeScreen> {
         setState(() {
           note.title = title;
         });
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScreen(note: note,)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScreen(note: note,))).then((value) {
+          fetchNotes();
+        });
       }
     });
   }
 
   void editNote(int i) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScreen(note: _notes[i]))).then((value) {
-      //call fetch
       fetchNotes();
     });
   }

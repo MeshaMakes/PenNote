@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import '../Utils/Colors.dart' as colors;
@@ -11,10 +10,10 @@ class DialogClass {
         barrierDismissible: dismissible,
         builder: (BuildContext context) {
           return Dialog(
+            elevation: 0.0,
             backgroundColor: colors.bg,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
             child: Container(
-              width: MediaQuery.of(context).size.width / 3,
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.all(20.0),
@@ -75,6 +74,90 @@ class DialogClass {
                         size: 15.0,
                         fontWeight: FontWeight.w400,
                       ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+    );
+  }
+
+  Future<bool> showConfirmDialog(BuildContext context, String message, {String title = "Caution", String positiveBtn = "Confirm",  String negativeBtn = "Cancel", bool dismissible = true}) {
+    return showDialog(
+        context: context,
+        barrierDismissible: dismissible,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: colors.bg,
+            elevation: 0.0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+            child: Container(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 30.0,),
+                    Text(
+                      "$message",
+                      style: TextStyle(
+                        color: colors.grey,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 30.0,),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Spacer(),
+                        ButtonView(
+                          color: colors.grey,
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                          margin: EdgeInsets.only(top: 20.0),
+                          padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                          child: Text(
+                            "$negativeBtn",
+                            style: TextStyle(
+                              color: colors.white,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10.0,),
+                        ButtonView(
+                          color: colors.primary,
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                          margin: EdgeInsets.only(top: 20.0),
+                          padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                          child: Text(
+                            "$positiveBtn",
+                            style: TextStyle(
+                              color: colors.bg,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -25,8 +25,10 @@ class _NoteTileView extends StatelessWidget {
 @override
   Widget build(BuildContext context) {
     return ButtonView(
+      width: double.infinity,
+      alignment: Alignment.centerLeft,
       onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScreen()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditScreen(note: state.widget.note,)));
       },
       color: Colors.transparent,
       splashColor: Colors.black87.withOpacity(0.50),
@@ -44,7 +46,7 @@ class _NoteTileView extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 15.0),
           ),
           TextView(
-            text: state.widget.note.noteTxt,
+            text: state.widget.note.noteTxt != null ? state.widget.note.noteTxt : "",
             color: colors.white,
             letterSpacing: 1.5,
             maxLines: 2,
