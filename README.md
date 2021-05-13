@@ -10,7 +10,7 @@
 
 [![Generic badge](https://img.shields.io/badge/status-Ongoing-green.svg)](https://shields.io/)
 
-PenNote is a minimal *markdown editor* 📝 made using Flutter as front end and Firebase as a backend. Pen Note gives you thr freedom to take notes the way how you want to, with the basic stripped markdown take minimal yet desirable notes for later. We welcome everyone to try it out and make something out if it, free free to donate if you see ot fit.
+PenNote is a minimal *markdown editor* 📝 made using Flutter as front end and Firebase as a backend (temporarily internal storage). Pen Note gives you thr freedom to take notes the way how you want to, with the basic stripped markdown take minimal yet desirable notes for later. We welcome everyone to try it out and make something out if it, free free to donate if you see ot fit.
 
 ## Features
 
