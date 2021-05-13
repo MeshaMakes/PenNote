@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+import '../Screens/HomeScreen.dart';
 import '../Widgets/Dialog.dart';
 import 'package:sad_lib/FormatClass.dart';
 import '../Utils/NoteModel.dart';
@@ -20,8 +21,6 @@ class EditScreen extends StatefulWidget {
 class _EditScreenController extends State<EditScreen> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => _EditScreenView(this);
-
-  //TODO: revise the last edited to make sure it adds up
 
   TabController _tab;
   TextEditingController _text;
@@ -57,7 +56,7 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
     _dialog.showConfirmDialog(context, "Are you sure you want to delete this note?").then((flag) {
       if(flag) {
         StorageClass().writeToMapRemove("Notes.pn", widget.note.id).then((value) {
-          Navigator.pop(context);
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
         });
       } else {
         Navigator.pop(context);
@@ -105,7 +104,7 @@ class _EditScreenView extends StatelessWidget {
             backgroundColor: colors.bg,
             leading: ButtonView(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
               },
               child: Icon(Icons.arrow_back_ios_rounded, color: colors.white, size: 30.0,),
             ),
