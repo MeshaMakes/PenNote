@@ -55,13 +55,20 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
   void deleteNote() {
     _dialog.showConfirmDialog(context, "Are you sure you want to delete this note?").then((flag) {
       if(flag) {
-        StorageClass().writeToMapRemove("Notes.pn", widget.note.id).then((value) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
-        });
+        if(widget.note.id != null) {
+          StorageClass().writeToMapRemove("Notes.pn", widget.note.id).then((value) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+          });
+        }
       } else {
         Navigator.pop(context);
       }
     });
+  }
+
+  void saveCheck() {
+    saveNote();
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
   @override
@@ -104,7 +111,7 @@ class _EditScreenView extends StatelessWidget {
             backgroundColor: colors.bg,
             leading: ButtonView(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+                state.saveCheck();
               },
               child: Icon(Icons.arrow_back_ios_rounded, color: colors.white, size: 30.0,),
             ),
@@ -120,7 +127,7 @@ class _EditScreenView extends StatelessWidget {
                     },
                     color: Colors.transparent,
                     splashColor: Colors.black87.withOpacity(0.50),
-                    child: Icon(Icons.save, color: colors.white, size: 25.0,),
+                    child: Icon(Icons.save_outlined, color: colors.white, size: 25.0,),
                     padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
                   ),
                   _showPopupNotebookMenu(context),

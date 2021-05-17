@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import 'package:sad_lib/StorageClass/StorageClass.dart';
 import '../Utils/NoteModel.dart';
@@ -147,13 +148,42 @@ class _HomeScreenView extends StatelessWidget {
             );
           } else {
             return Center(
-              child: Container(
-                child: TextView(
-                  text: "No Notes, add new",
-                  color: colors.primary,
-                  size: 30.0,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/empty.svg',
+                    width: state._size.width / 1.5,
+                    height: state._size.width / 1.5,
+                  ),
+                  TextView.rich(
+                    padding: EdgeInsets.only(top: 20.0),
+                    align: TextAlign.center,
+                    textSpan: [
+                      TextView(
+                        text: "No Notes? ",
+                        color: colors.grey,
+                        letterSpacing: 1.5,
+                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      TextView(
+                        text: "Create a new note ",
+                        color: colors.primary,
+                        letterSpacing: 1.5,
+                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      TextView(
+                        text: "by pressing the button below",
+                        color: colors.grey,
+                        letterSpacing: 1.5,
+                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           }
