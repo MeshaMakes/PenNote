@@ -295,4 +295,8 @@ class _EditScreenView extends StatelessWidget {
         ],
       );
     }
+
+  Widget _mobileView() {
+    return Container();
+  }
 }

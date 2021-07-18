@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sad_lib/CustomWidgets.dart';
@@ -25,7 +27,7 @@ class _HomeScreenController extends State<HomeScreen> {
   List<Note> _notes = [];
   Size _size;
   Future<void> _future;
-
+  bool _tabletDrawer;
   void createNote() {
     Note note = Note();
     _dialog.showInputDialog(context, title: "Give your note a name", hint: "Enter a name", positiveBtn: "Create", dismissible: true).then((title) {
@@ -46,6 +48,7 @@ class _HomeScreenController extends State<HomeScreen> {
   void initState() {
     _future = fetchNotes();
     _dialog = DialogClass();
+    _tabletDrawer = false;
     super.initState();
   }
 
@@ -69,12 +72,15 @@ class _HomeScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive.isDesktop(context) ? _desktop() : Responsive.isTablet(context) ? _tablet() : _mobile(context);
+    state._size = MediaQuery.of(context).size;
+    return Responsive.isDesktop(context) ? _desktop() :
+    Responsive.isTablet(context) ?
+    _tablet(context) :
+    _mobile(context);
   }
 
 
   Widget _mobile(BuildContext context) {
-  state._size = MediaQuery.of(context).size;
     return Material(
       color: colors.bg,
       child: SafeArea(
@@ -106,9 +112,44 @@ class _HomeScreenView extends StatelessWidget {
     );
   }
 
-  Widget _tablet() {
-    return Container(
-      color: Colors.blue,
+  Widget _tablet(BuildContext context) {
+    return Scaffold(
+      backgroundColor: colors.bg,
+      appBar: AppBar(
+        backgroundColor: colors.bg,
+      ),
+      drawer: Container(
+        color: colors.bg,
+        child: Column(
+          children: [
+            TopBar(),
+            ButtonView(
+              onPressed: () {
+                state.createNote();
+              },
+              borderRadius: 5.0,
+              widthType: Width.stretch,
+              color: colors.primary,
+              padding: EdgeInsets.symmetric(vertical: 10.0),
+              margin: EdgeInsets.all(20.0),
+              child: TextView(
+                text: "New Note",
+                color: colors.bg,
+                letterSpacing: 1.5,
+                size: 20.0,
+                fontWeight: FontWeight.w600,
+                align: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: _builder(context),
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        color: Colors.purple,
+      ),
     );
   }
 
@@ -150,6 +191,7 @@ class _HomeScreenView extends StatelessWidget {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
                     'assets/empty.svg',
@@ -164,21 +206,21 @@ class _HomeScreenView extends StatelessWidget {
                         text: "No Notes? ",
                         color: colors.grey,
                         letterSpacing: 1.5,
-                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
+                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 30.0 : 18.0,
                         fontWeight: FontWeight.w400,
                       ),
                       TextView(
                         text: "Create a new note ",
                         color: colors.primary,
                         letterSpacing: 1.5,
-                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
+                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 30.0 : 18.0,
                         fontWeight: FontWeight.w400,
                       ),
                       TextView(
                         text: "by pressing the button below",
                         color: colors.grey,
                         letterSpacing: 1.5,
-                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 20.0 : 18.0,
+                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 30.0 : 18.0,
                         fontWeight: FontWeight.w400,
                       ),
                     ],

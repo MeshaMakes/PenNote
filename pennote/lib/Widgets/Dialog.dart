@@ -70,7 +70,7 @@ class DialogClass {
                       },
                       child: TextView(
                         text: "$positiveBtn",
-                        color: colors.white,
+                        color: colors.bg,
                         size: 15.0,
                         fontWeight: FontWeight.w400,
                       ),
