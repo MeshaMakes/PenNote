@@ -153,92 +153,7 @@ class _EditScreenView extends StatelessWidget {
               ],
             ),
           ),
-          body: TabBarView(
-            controller: state._tab,
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    margin: EdgeInsets.all(20.0),
-                    child: TextField(
-                      controller: state._text,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      toolbarOptions: ToolbarOptions(cut: true, copy: true, paste: true, selectAll: true),
-                      style: TextStyle(color: colors.grey),
-                      cursorColor: colors.grey,
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Start typing",
-                          hintStyle: TextStyle(color: colors.grey),
-                      ),
-                      onChanged: (String text) {
-                        state.setText(text);
-                      },
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10.0, bottom: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(Icons.watch_later_outlined, color: colors.primary, size: 20.0,),
-                              TextView(
-                                text: state._format.formattedDate(state.widget.note.creationDate),
-                                size: 12.0,
-                                color: colors.white,
-                                fontWeight: FontWeight.w400,
-                                padding: EdgeInsets.only(left: 10.0),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10.0,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(Icons.edit, color: colors.primary, size: 20.0,),
-                              TextView(
-                                text: state._format.formattedDate(state.widget.note.lastEdited),
-                                size: 12.0,
-                                color: colors.white,
-                                fontWeight: FontWeight.w400,
-                                padding: EdgeInsets.only(left: 10.0),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.all(20.0),
-                child: MarkdownWidget(
-                  data: state._text.text,
-                  styleConfig: StyleConfig(
-                    markdownTheme: MarkdownTheme.darkTheme,
-                    titleConfig: TitleConfig(
-                      showDivider: false,
-                    ),
-                    pConfig: PConfig(
-                      linkStyle: TextStyle(color: colors.primary),
-                      onLinkTap: (url) {
-                        launch(url);
-                      }
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          body: Responsive.isMobile(context) || Responsive.isTablet(context) ? _mobileView() : _desktopView(),
         ),
       ),
     );
@@ -297,6 +212,97 @@ class _EditScreenView extends StatelessWidget {
     }
 
   Widget _mobileView() {
-    return Container();
+    return TabBarView(
+      controller: state._tab,
+      children: [
+        Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              margin: EdgeInsets.all(20.0),
+              child: TextField(
+                controller: state._text,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                toolbarOptions: ToolbarOptions(cut: true, copy: true, paste: true, selectAll: true),
+                style: TextStyle(color: colors.grey),
+                cursorColor: colors.grey,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Start typing",
+                  hintStyle: TextStyle(color: colors.grey),
+                ),
+                onChanged: (String text) {
+                  state.setText(text);
+                },
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: EdgeInsets.only(right: 10.0, bottom: 20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.watch_later_outlined, color: colors.primary, size: 20.0,),
+                        TextView(
+                          text: state._format.formattedDate(state.widget.note.creationDate),
+                          size: 12.0,
+                          color: colors.white,
+                          fontWeight: FontWeight.w400,
+                          padding: EdgeInsets.only(left: 10.0),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.0,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.edit, color: colors.primary, size: 20.0,),
+                        TextView(
+                          text: state._format.formattedDate(state.widget.note.lastEdited),
+                          size: 12.0,
+                          color: colors.white,
+                          fontWeight: FontWeight.w400,
+                          padding: EdgeInsets.only(left: 10.0),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          margin: EdgeInsets.all(20.0),
+          child: MarkdownWidget(
+            data: state._text.text,
+            styleConfig: StyleConfig(
+              markdownTheme: MarkdownTheme.darkTheme,
+              titleConfig: TitleConfig(
+                showDivider: false,
+              ),
+              pConfig: PConfig(
+                  linkStyle: TextStyle(color: colors.primary),
+                  onLinkTap: (url) {
+                    launch(url);
+                  }
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _desktopView() {
+    return Container(
+    color: Colors.grey,
+  );
   }
 }

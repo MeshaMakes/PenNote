@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sad_lib/CustomWidgets.dart';
@@ -21,13 +20,12 @@ class _HomeScreenController extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => _HomeScreenView(this);
 
-  //TODO: add empty state art
-
   DialogClass _dialog;
   List<Note> _notes = [];
   Size _size;
   Future<void> _future;
   bool _tabletDrawer;
+
   void createNote() {
     Note note = Note();
     _dialog.showInputDialog(context, title: "Give your note a name", hint: "Enter a name", positiveBtn: "Create", dismissible: true).then((title) {
@@ -75,7 +73,7 @@ class _HomeScreenView extends StatelessWidget {
     state._size = MediaQuery.of(context).size;
     return Responsive.isDesktop(context) ? _desktop() :
     Responsive.isTablet(context) ?
-    _tablet(context) :
+    _mobile(context) :
     _mobile(context);
   }
 
@@ -101,6 +99,7 @@ class _HomeScreenView extends StatelessWidget {
                 onPressed: () {
                   state.createNote();
                 },
+                tooltip: "Create Note",
                 backgroundColor: colors.primary.withOpacity(0.80),
                 splashColor: colors.primary,
                 child: Icon(Icons.add, color: colors.bg, size: 30.0,),
@@ -199,28 +198,28 @@ class _HomeScreenView extends StatelessWidget {
                     height: state._size.width / 1.5,
                   ),
                   TextView.rich(
-                    padding: EdgeInsets.only(top: 20.0),
+                    padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
                     align: TextAlign.center,
                     textSpan: [
                       TextView(
                         text: "No Notes? ",
                         color: colors.grey,
                         letterSpacing: 1.5,
-                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 30.0 : 18.0,
+                        size: Responsive.isTablet(context) ? 25.0 : 18.0,
                         fontWeight: FontWeight.w400,
                       ),
                       TextView(
                         text: "Create a new note ",
                         color: colors.primary,
                         letterSpacing: 1.5,
-                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 30.0 : 18.0,
+                        size: Responsive.isTablet(context) ? 25.0 : 18.0,
                         fontWeight: FontWeight.w400,
                       ),
                       TextView(
                         text: "by pressing the button below",
                         color: colors.grey,
                         letterSpacing: 1.5,
-                        size: Responsive.isDesktop(context) || Responsive.isTablet(context) ? 30.0 : 18.0,
+                        size: Responsive.isTablet(context) ? 25.0 : 18.0,
                         fontWeight: FontWeight.w400,
                       ),
                     ],
