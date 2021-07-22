@@ -36,7 +36,7 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
     });
   }
 
-  void saveNote() {
+  Future<void> saveNote() async {
     if(_noteText != null && _noteText.isNotEmpty) {
       note.noteTxt = _noteText;
       note.lastEdited = DateTime.now();
@@ -67,8 +67,7 @@ class _EditScreenController extends State<EditScreen> with SingleTickerProviderS
   }
 
   void saveCheck() {
-    saveNote();
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+    saveNote().then((_) => Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen())));
   }
 
   @override
@@ -111,7 +110,13 @@ class _EditScreenView extends StatelessWidget {
             backgroundColor: colors.bg,
             leading: ButtonView(
               onPressed: () {
-                state.saveCheck();
+                state._dialog.showConfirmDialog(context, "Save before leaving?", positiveBtn: "Yes", negativeBtn: "No").then((flag){
+                  if(flag) {
+                    state.saveCheck();
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+                  }
+                });
               },
               child: Icon(Icons.arrow_back_ios_rounded, color: colors.white, size: 30.0,),
             ),

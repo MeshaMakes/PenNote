@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pennote/Widgets/DesktopView.dart';
 import 'package:sad_lib/CustomWidgets.dart';
 import 'package:sad_lib/StorageClass/StorageClass.dart';
 import '../Utils/NoteModel.dart';
@@ -71,7 +72,7 @@ class _HomeScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     state._size = MediaQuery.of(context).size;
-    return Responsive.isDesktop(context) ? _desktop() :
+    return Responsive.isDesktop(context) ? _desktop(context) :
     Responsive.isTablet(context) ?
     _mobile(context) :
     _mobile(context);
@@ -152,9 +153,12 @@ class _HomeScreenView extends StatelessWidget {
     );
   }
 
-  Widget _desktop() {
-    return Container(
-      color: Colors.red,
+  Widget _desktop(BuildContext context) {
+    return DesktopView(
+      builder: _builder(context),
+      createNote: () {
+        state.createNote();
+      },
     );
   }
 
@@ -194,8 +198,8 @@ class _HomeScreenView extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     'assets/empty.svg',
-                    width: state._size.width / 1.5,
-                    height: state._size.width / 1.5,
+                    width: Responsive.isDesktop(context) ? state._size.width / 5 : state._size.width / 1.5,
+                    height: Responsive.isDesktop(context) ? state._size.width / 5 : state._size.width / 1.5,
                   ),
                   TextView.rich(
                     padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
