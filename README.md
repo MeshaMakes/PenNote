@@ -60,3 +60,6 @@ For Web
 Once you run the app you should be opened up to this page where you can then enter the markdown view:
 
 ![up276o3ov0gpwdkhio0v](https://user-images.githubusercontent.com/53268895/117575303-34691780-b0af-11eb-893f-1df408797b16.jpg)
+
+---
+![Pen Note](https://user-images.githubusercontent.com/53268895/134790580-a9d4cc27-e1c1-43ac-9352-ab542b26de3d.png)
